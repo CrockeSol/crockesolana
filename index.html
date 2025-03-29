@@ -37,6 +37,31 @@
       position: relative;
     }
 
+    /* Enhanced background with light streaks */
+    .light-streaks {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+      opacity: 0.15;
+    }
+
+    .streak {
+      position: absolute;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      width: 150%;
+      height: 2px;
+      animation: streakMove 20s linear infinite;
+    }
+
+    @keyframes streakMove {
+      0% { transform: translateX(-100%) rotate(20deg); }
+      100% { transform: translateX(100%) rotate(20deg); }
+    }
+
     .bg-elements {
       position: fixed;
       top: 0;
@@ -47,13 +72,20 @@
       overflow: hidden;
     }
 
+    /* Enhanced glowing circles */
     .bg-circle {
       position: absolute;
       border-radius: 50%;
       filter: blur(60px);
-      opacity: 0.15;
-      animation: float 15s infinite linear;
+      opacity: 0.2;
+      animation: float 15s infinite linear, glowPulse 8s infinite alternate;
       transition: transform 0.1s linear;
+    }
+
+    @keyframes glowPulse {
+      0% { opacity: 0.15; box-shadow: 0 0 50px 20px rgba(255, 215, 0, 0.1); }
+      50% { opacity: 0.25; box-shadow: 0 0 70px 30px rgba(255, 215, 0, 0.2); }
+      100% { opacity: 0.15; box-shadow: 0 0 50px 20px rgba(255, 215, 0, 0.1); }
     }
 
     .circle-1 {
@@ -113,6 +145,7 @@
       }
     }
 
+    /* Enhanced particles with more glow */
     .particles {
       position: fixed;
       top: 0;
@@ -125,11 +158,12 @@
 
     .particle {
       position: absolute;
-      width: 2px;
-      height: 2px;
+      width: 3px;
+      height: 3px;
       background: var(--primary);
       border-radius: 50%;
-      opacity: 0.3;
+      opacity: 0.5;
+      box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.5);
     }
 
     @keyframes falling {
@@ -142,8 +176,8 @@
     }
 
     @keyframes twinkle {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.8; }
+      0%, 100% { opacity: 0.3; box-shadow: 0 0 5px 1px rgba(255, 215, 0, 0.3); }
+      50% { opacity: 0.8; box-shadow: 0 0 15px 3px rgba(255, 215, 0, 0.7); }
     }
 
     .container {
@@ -158,6 +192,7 @@
       min-height: 100vh;
     }
     
+    /* Enhanced logo glow */
     .logo {
       width: 160px;
       height: 160px;
@@ -165,16 +200,21 @@
       border-radius: 50%;
       border: 4px solid var(--primary);
       padding: 8px;
-      box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
-      animation: logoFloat 6s ease-in-out infinite;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+      animation: logoFloat 6s ease-in-out infinite, logoGlow 3s ease-in-out infinite alternate;
       transition: all 0.3s ease;
       cursor: pointer;
     }
 
+    @keyframes logoGlow {
+      0% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.6); }
+      100% { box-shadow: 0 0 50px rgba(255, 215, 0, 0.9); }
+    }
+
     .logo:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 50px rgba(255, 215, 0, 0.6);
-      filter: brightness(1.1);
+      box-shadow: 0 0 60px rgba(255, 215, 0, 0.8);
+      filter: brightness(1.2);
     }
 
     @keyframes logoFloat {
@@ -186,17 +226,38 @@
       }
     }
     
+    /* Enhanced CROCKE text with more lighting */
     h1 {
       font-size: 2.5rem;
       font-weight: 700;
       margin: 1rem 0 0.5rem;
       color: var(--primary);
       text-align: center;
-      text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
-      animation: neonGlow 2s ease-in-out infinite alternate, bounceIn 1s ease-out;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.7),
+                   0 0 20px rgba(255, 215, 0, 0.5),
+                   0 0 30px rgba(255, 215, 0, 0.3);
+      animation: neonGlow 1.5s ease-in-out infinite alternate, 
+                 bounceIn 1s ease-out,
+                 textFlicker 5s linear infinite;
+      position: relative;
     }
 
-    /* New CROCKE text animation */
+    /* Flickering light effect */
+    @keyframes textFlicker {
+      0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.7),
+                     0 0 20px rgba(255, 215, 0, 0.5),
+                     0 0 30px rgba(255, 215, 0, 0.3);
+      }
+      20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+        opacity: 0.8;
+        text-shadow: 0 0 5px rgba(255, 215, 0, 0.5),
+                     0 0 10px rgba(255, 215, 0, 0.3),
+                     0 0 15px rgba(255, 215, 0, 0.1);
+      }
+    }
+
     @keyframes neonGlow {
       0% {
         text-shadow: 0 0 10px rgba(255, 215, 0, 0.7),
@@ -224,7 +285,7 @@
       }
     }
 
-    /* Updated COMING SOON badge with new image */
+    /* Enhanced COMING SOON badge with more glow */
     .coming-soon-badge {
       background-color: var(--accent);
       color: var(--secondary);
@@ -233,18 +294,27 @@
       font-weight: 700;
       font-size: 1.3rem;
       margin: 1rem 0;
-      animation: pulse 2s infinite, floatUp 3s ease-in-out infinite;
+      animation: pulse 2s infinite, 
+                 floatUp 3s ease-in-out infinite,
+                 badgeGlow 3s ease-in-out infinite alternate;
       border: 2px solid var(--primary);
       display: flex;
       align-items: center;
       gap: 12px;
       text-decoration: none;
       transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes badgeGlow {
+      0% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
+      100% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.6); }
     }
 
     .coming-soon-badge:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
     }
 
     .coming-soon-badge .badge-image {
@@ -252,13 +322,19 @@
       height: 30px;
       object-fit: contain;
       transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7));
-      animation: badgeImageFloat 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.9));
+      animation: badgeImageFloat 4s ease-in-out infinite,
+                 badgeImageGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes badgeImageGlow {
+      0% { filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.7)); }
+      100% { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 1)); }
     }
 
     .coming-soon-badge:hover .badge-image {
       transform: rotate(15deg) scale(1.2);
-      filter: drop-shadow(0 0 10px var(--primary));
+      filter: drop-shadow(0 0 15px var(--primary));
     }
 
     @keyframes badgeImageFloat {
@@ -277,14 +353,28 @@
       50% { transform: translateY(-10px); }
     }
 
+    /* Enhanced tagline with light effects */
     .tagline {
       font-size: 1.5rem;
       font-weight: 400;
       margin: 1rem 0;
       color: var(--primary);
       text-align: center;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-      animation: slideIn 1s ease-out 0.3s both, glow 3s infinite 1s;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      animation: slideIn 1s ease-out 0.3s both, 
+                 glow 3s infinite 1s,
+                 textFlicker 6s linear infinite;
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+      50% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+      100% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .coming-soon-message {
@@ -303,7 +393,8 @@
       width: 100%;
       max-width: 600px;
       border: 1px solid rgba(255, 215, 0, 0.1);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                  0 0 20px rgba(255, 215, 0, 0.1);
       text-align: center;
       animation: slideIn 1s ease-out 0.9s both;
       transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
@@ -311,7 +402,8 @@
 
     .bio-card:hover {
       transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 15px 45px rgba(255, 215, 0, 0.3);
+      box-shadow: 0 15px 45px rgba(255, 215, 0, 0.3),
+                  0 0 30px rgba(255, 215, 0, 0.2);
     }
 
     .bio-title {
@@ -346,6 +438,7 @@
       align-items: center;
       justify-content: center;
       border: 1px solid rgba(255, 215, 0, 0.05);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
@@ -358,7 +451,8 @@
     
     .social-card:hover {
       transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2);
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2),
+                  0 0 20px rgba(255, 215, 0, 0.2);
       background: rgba(255, 255, 255, 0.07);
     }
 
@@ -382,11 +476,12 @@
       margin-bottom: 1rem;
       color: var(--primary);
       transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
     }
 
     .social-card:hover .social-icon {
       transform: scale(1.2) rotate(10deg);
-      filter: drop-shadow(0 0 8px var(--primary));
+      filter: drop-shadow(0 0 15px var(--primary));
     }
     
     .x-logo {
@@ -399,7 +494,7 @@
 
     .social-card:hover .x-logo {
       transform: scale(1.2) rotate(10deg);
-      filter: brightness(0) saturate(100%) invert(85%) sepia(57%) saturate(7498%) hue-rotate(358deg) brightness(105%) contrast(106%) drop-shadow(0 0 8px var(--primary));
+      filter: brightness(0) saturate(100%) invert(85%) sepia(57%) saturate(7498%) hue-rotate(358deg) brightness(105%) contrast(106%) drop-shadow(0 0 15px var(--primary));
     }
     
     .social-name {
@@ -444,7 +539,8 @@
       width: 100%;
       max-width: 600px;
       border: 1px solid rgba(255, 215, 0, 0.1);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                  0 0 20px rgba(255, 215, 0, 0.1);
       text-align: center;
       animation: slideIn 1s ease-out 1.7s both;
       transition: all 0.3s ease;
@@ -452,7 +548,8 @@
 
     .subscribe-container:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(255, 215, 0, 0.2);
+      box-shadow: 0 12px 40px rgba(255, 215, 0, 0.2),
+                  0 0 25px rgba(255, 215, 0, 0.2);
     }
 
     .subscribe-title {
@@ -460,6 +557,7 @@
       color: var(--primary);
       margin-bottom: 1rem;
       text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+      animation: glow 3s infinite;
     }
 
     .subscribe-form {
@@ -479,10 +577,11 @@
       font-size: 1rem;
       outline: none;
       transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
     }
 
     .email-input:focus {
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
       transform: scale(1.02);
     }
 
@@ -498,11 +597,12 @@
       transition: all 0.3s ease;
       text-transform: uppercase;
       letter-spacing: 1px;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
     }
 
     .subscribe-btn:hover {
       transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+      box-shadow: 0 5px 25px rgba(255, 215, 0, 0.6);
     }
 
     .subscribe-btn:active {
@@ -578,6 +678,9 @@
   </style>
 </head>
 <body>
+  <!-- Light streaks background -->
+  <div class="light-streaks" id="lightStreaks"></div>
+
   <div class="bg-elements">
     <div class="bg-circle circle-1"></div>
     <div class="bg-circle circle-2"></div>
@@ -664,19 +767,19 @@
   </div>
 
   <script>
-    // Enhanced particle system
+    // Enhanced particle system with more particles
     const particlesContainer = document.getElementById('particles');
-    const particleCount = 100;
+    const particleCount = 150; // Increased number of particles
     
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement('div');
       particle.classList.add('particle');
       
-      const size = Math.random() * 4 + 1;
+      const size = Math.random() * 4 + 2; // Larger particles
       const posX = Math.random() * 100;
       const delay = Math.random() * 15;
       const duration = Math.random() * 15 + 10;
-      const opacity = Math.random() * 0.6 + 0.1;
+      const opacity = Math.random() * 0.7 + 0.2; // More visible
       
       particle.style.width = `${size}px`;
       particle.style.height = `${size}px`;
@@ -685,13 +788,31 @@
       particle.style.animationDuration = `${duration}s`;
       particle.style.opacity = opacity;
       
+      // Random glow color variation
+      const hue = 50 + Math.random() * 10; // Gold color range
+      particle.style.boxShadow = `0 0 ${Math.random() * 15 + 5}px ${Math.random() * 3 + 1}px hsla(${hue}, 100%, 50%, 0.7)`;
+      
       particle.style.animation = `falling ${duration}s linear ${delay}s infinite, 
                                 twinkle ${Math.random() * 5 + 3}s ease-in-out infinite`;
       
       particlesContainer.appendChild(particle);
     }
 
-    // Interactive mouse effects
+    // Create light streaks
+    const lightStreaks = document.getElementById('lightStreaks');
+    for (let i = 0; i < 8; i++) {
+      const streak = document.createElement('div');
+      streak.classList.add('streak');
+      streak.style.top = `${Math.random() * 100}%`;
+      streak.style.left = `${Math.random() * 100}%`;
+      streak.style.opacity = `${Math.random() * 0.1 + 0.05}`;
+      streak.style.animationDuration = `${Math.random() * 10 + 15}s`;
+      streak.style.animationDelay = `${Math.random() * 5}s`;
+      streak.style.transform = `rotate(${Math.random() * 30 - 15}deg)`;
+      lightStreaks.appendChild(streak);
+    }
+
+    // Enhanced interactive mouse effects
     document.addEventListener('mousemove', (e) => {
       const x = e.clientX / window.innerWidth;
       const y = e.clientY / window.innerHeight;
@@ -706,6 +827,17 @@
         const xOffset = (x - 0.5) * 50 * speed;
         const yOffset = (y - 0.5) * 50 * speed;
         circle.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+      });
+
+      // Light streak follow effect
+      const streaks = document.querySelectorAll('.streak');
+      streaks.forEach(streak => {
+        const streakX = parseFloat(streak.style.left || '50');
+        const streakY = parseFloat(streak.style.top || '50');
+        const dx = (x * 100 - streakX) * 0.0005;
+        const dy = (y * 100 - streakY) * 0.0005;
+        streak.style.left = `${streakX + dx}%`;
+        streak.style.top = `${streakY + dy}%`;
       });
     });
 
@@ -777,11 +909,6 @@
       @keyframes fadeOut {
         0% { opacity: 1; }
         100% { opacity: 0; }
-      }
-      @keyframes badgeImageGlow {
-        0% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5)); }
-        50% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.9)); }
-        100% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5)); }
       }
     `;
     document.head.appendChild(styleTag);
