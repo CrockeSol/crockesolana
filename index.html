@@ -193,29 +193,77 @@
       color: var(--primary);
       text-align: center;
       text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
-      animation: glow 3s infinite, slideIn 1s ease-out;
+      animation: neonGlow 2s ease-in-out infinite alternate, bounceIn 1s ease-out;
     }
 
-    @keyframes glow {
-      0% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
-      50% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
-      100% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+    /* New CROCKE text animation */
+    @keyframes neonGlow {
+      0% {
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.7),
+                     0 0 20px rgba(255, 215, 0, 0.5),
+                     0 0 30px rgba(255, 215, 0, 0.3);
+      }
+      100% {
+        text-shadow: 0 0 15px rgba(255, 215, 0, 0.9),
+                     0 0 30px rgba(255, 215, 0, 0.7),
+                     0 0 45px rgba(255, 215, 0, 0.5);
+      }
     }
 
-    @keyframes slideIn {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      60% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+      }
     }
 
+    /* Updated COMING SOON badge with new image */
     .coming-soon-badge {
-      background-color: var(--primary);
+      background-color: var(--accent);
       color: var(--secondary);
-      padding: 8px 20px;
-      border-radius: 20px;
+      padding: 12px 30px;
+      border-radius: 30px;
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       margin: 1rem 0;
       animation: pulse 2s infinite, floatUp 3s ease-in-out infinite;
+      border: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .coming-soon-badge:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+
+    .coming-soon-badge .badge-image {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7));
+      animation: badgeImageFloat 4s ease-in-out infinite;
+    }
+
+    .coming-soon-badge:hover .badge-image {
+      transform: rotate(15deg) scale(1.2);
+      filter: drop-shadow(0 0 10px var(--primary));
+    }
+
+    @keyframes badgeImageFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(5deg); }
     }
 
     @keyframes pulse {
@@ -279,81 +327,6 @@
       line-height: 1.6;
     }
 
-    /* New Email Subscription Section */
-    .subscribe-container {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
-      padding: 2rem;
-      margin: 2rem 0;
-      width: 100%;
-      max-width: 600px;
-      border: 1px solid rgba(255, 215, 0, 0.1);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      animation: slideIn 1s ease-out 1.2s both;
-      transition: all 0.3s ease;
-    }
-
-    .subscribe-container:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(255, 215, 0, 0.2);
-    }
-
-    .subscribe-title {
-      font-size: 1.4rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-    }
-
-    .subscribe-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-
-    .email-input {
-      padding: 12px 20px;
-      border-radius: 30px;
-      border: 2px solid var(--primary);
-      background: rgba(0, 0, 0, 0.3);
-      color: white;
-      font-size: 1rem;
-      outline: none;
-      transition: all 0.3s ease;
-    }
-
-    .email-input:focus {
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-      transform: scale(1.02);
-    }
-
-    .subscribe-btn {
-      padding: 12px 30px;
-      border-radius: 30px;
-      background: var(--primary);
-      color: var(--secondary);
-      border: none;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .subscribe-btn:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
-    }
-
-    .subscribe-btn:active {
-      transform: translateY(1px);
-    }
-
     .social-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -361,6 +334,7 @@
       width: 100%;
       max-width: 600px;
       margin: 2rem 0;
+      animation: fadeIn 1s ease-out 1.2s both;
     }
     
     .social-card {
@@ -375,14 +349,12 @@
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
-      animation: slideIn 1s ease-out;
-      animation-fill-mode: both;
     }
 
-    .social-card:nth-child(1) { animation-delay: 1.5s; }
-    .social-card:nth-child(2) { animation-delay: 1.7s; }
-    .social-card:nth-child(3) { animation-delay: 1.9s; }
-    .social-card:nth-child(4) { animation-delay: 2.1s; }
+    .social-card:nth-child(1) { animation: slideIn 1s ease-out 1.3s both; }
+    .social-card:nth-child(2) { animation: slideIn 1s ease-out 1.4s both; }
+    .social-card:nth-child(3) { animation: slideIn 1s ease-out 1.5s both; }
+    .social-card:nth-child(4) { animation: slideIn 1s ease-out 1.6s both; }
     
     .social-card:hover {
       transform: translateY(-5px) scale(1.03);
@@ -461,6 +433,81 @@
       z-index: 1;
       text-indent: -9999px;
     }
+
+    /* Email Subscription Section */
+    .subscribe-container {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+      width: 100%;
+      max-width: 600px;
+      border: 1px solid rgba(255, 215, 0, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      animation: slideIn 1s ease-out 1.7s both;
+      transition: all 0.3s ease;
+    }
+
+    .subscribe-container:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(255, 215, 0, 0.2);
+    }
+
+    .subscribe-title {
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    .subscribe-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .email-input {
+      padding: 12px 20px;
+      border-radius: 30px;
+      border: 2px solid var(--primary);
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .email-input:focus {
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+      transform: scale(1.02);
+    }
+
+    .subscribe-btn {
+      padding: 12px 30px;
+      border-radius: 30px;
+      background: var(--primary);
+      color: var(--secondary);
+      border: none;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .subscribe-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    }
+
+    .subscribe-btn:active {
+      transform: translateY(1px);
+    }
     
     footer {
       text-align: center;
@@ -514,6 +561,16 @@
         grid-template-columns: 1fr;
       }
 
+      .coming-soon-badge {
+        padding: 10px 20px;
+        font-size: 1.1rem;
+      }
+
+      .coming-soon-badge .badge-image {
+        width: 24px;
+        height: 24px;
+      }
+
       .subscribe-form {
         width: 100%;
       }
@@ -535,9 +592,15 @@
          alt="CROCKE Logo" 
          class="logo animate__animated animate__fadeIn" />
     
-    <h1 class="animate__animated animate__fadeInDown">CROCKE</h1>
+    <h1 class="animate__animated">CROCKE</h1>
     
-    <div class="coming-soon-badge animate__animated animate__pulse animate__infinite">COMING SOON</div>
+    <!-- Updated COMING SOON badge with new image -->
+    <a href="https://x.com/crockesol" target="_blank" class="coming-soon-badge animate__animated animate__pulse animate__infinite">
+      <img src="https://peach-tricky-puma-362.mypinata.cloud/ipfs/bafkreiayhhl5b7dtzx3qzlxljjeynyhntnougrjjzww2nr4padzddxnhvm" 
+           alt="CROCKE Badge" 
+           class="badge-image" />
+      COMING SOON
+    </a>
     
     <p class="tagline animate__animated animate__fadeIn">
       The next evolution in meme tokens
@@ -555,15 +618,7 @@
       </div>
     </div>
 
-    <!-- New Email Subscription Section -->
-    <div class="subscribe-container">
-      <div class="subscribe-title">Get Launch Notifications</div>
-      <form class="subscribe-form" id="emailForm">
-        <input type="email" class="email-input" placeholder="Your email address" required>
-        <button type="submit" class="subscribe-btn">Notify Me</button>
-      </form>
-    </div>
-    
+    <!-- Social Media Section -->
     <div class="social-grid">
       <div class="social-card">
         <i class="fab fa-instagram social-icon"></i>
@@ -582,7 +637,7 @@
       <div class="social-card">
         <i class="fab fa-telegram social-icon"></i>
         <div class="social-name">Telegram</div>
-        <div class="social-handle">@crockesol</div>
+        <div class="social-handle">@crockesolana</div>
         <a href="https://t.me/crockesolana" target="_blank" class="social-link">Telegram</a>
       </div>
       
@@ -592,6 +647,15 @@
         <div class="social-handle">@crockecommunity</div>
         <a href="https://x.com/crockecommunity" target="_blank" class="social-link">X Community</a>
       </div>
+    </div>
+
+    <!-- Email Subscription Section -->
+    <div class="subscribe-container">
+      <div class="subscribe-title">Get Launch Notifications</div>
+      <form class="subscribe-form" id="emailForm">
+        <input type="email" class="email-input" placeholder="Your email address" required>
+        <button type="submit" class="subscribe-btn">Notify Me</button>
+      </form>
     </div>
     
     <footer class="animate__animated animate__fadeIn">
@@ -714,8 +778,13 @@
         0% { opacity: 1; }
         100% { opacity: 0; }
       }
+      @keyframes badgeImageGlow {
+        0% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5)); }
+        50% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.9)); }
+        100% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5)); }
+      }
     `;
     document.head.appendChild(styleTag);
   </script>
 </body>
-</html>        
+</html>
