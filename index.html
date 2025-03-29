@@ -37,31 +37,6 @@
       position: relative;
     }
 
-    /* Enhanced background with light streaks */
-    .light-streaks {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      overflow: hidden;
-      opacity: 0.15;
-    }
-
-    .streak {
-      position: absolute;
-      background: linear-gradient(90deg, transparent, var(--primary), transparent);
-      width: 150%;
-      height: 2px;
-      animation: streakMove 20s linear infinite;
-    }
-
-    @keyframes streakMove {
-      0% { transform: translateX(-100%) rotate(20deg); }
-      100% { transform: translateX(100%) rotate(20deg); }
-    }
-
     .bg-elements {
       position: fixed;
       top: 0;
@@ -70,22 +45,16 @@
       height: 100%;
       z-index: -1;
       overflow: hidden;
+      pointer-events: none;
     }
 
-    /* Enhanced glowing circles */
     .bg-circle {
       position: absolute;
       border-radius: 50%;
       filter: blur(60px);
-      opacity: 0.2;
-      animation: float 15s infinite linear, glowPulse 8s infinite alternate;
-      transition: transform 0.1s linear;
-    }
-
-    @keyframes glowPulse {
-      0% { opacity: 0.15; box-shadow: 0 0 50px 20px rgba(255, 215, 0, 0.1); }
-      50% { opacity: 0.25; box-shadow: 0 0 70px 30px rgba(255, 215, 0, 0.2); }
-      100% { opacity: 0.15; box-shadow: 0 0 50px 20px rgba(255, 215, 0, 0.1); }
+      opacity: 0.15;
+      animation: float 15s infinite linear;
+      will-change: transform;
     }
 
     .circle-1 {
@@ -145,7 +114,7 @@
       }
     }
 
-    /* Enhanced particles with more glow */
+    /* Optimized particles container */
     .particles {
       position: fixed;
       top: 0;
@@ -154,30 +123,32 @@
       height: 100%;
       z-index: -1;
       overflow: hidden;
+      pointer-events: none;
     }
 
-    .particle {
+    /* Lightning effect for social cards */
+    .social-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-lightning {
       position: absolute;
-      width: 3px;
-      height: 3px;
-      background: var(--primary);
-      border-radius: 50%;
-      opacity: 0.5;
-      box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.5);
+      width: 2px;
+      height: 0;
+      background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+      opacity: 0;
+      transform-origin: top center;
+      z-index: 0;
     }
 
-    @keyframes falling {
-      0% {
-        transform: translateY(-100vh);
-      }
-      100% {
-        transform: translateY(100vh);
-      }
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; box-shadow: 0 0 5px 1px rgba(255, 215, 0, 0.3); }
-      50% { opacity: 0.8; box-shadow: 0 0 15px 3px rgba(255, 215, 0, 0.7); }
+    @keyframes socialLightning {
+      0% { height: 0; opacity: 0; }
+      10% { height: 50%; opacity: 0.8; }
+      20% { height: 80%; opacity: 0.5; }
+      30% { height: 100%; opacity: 0.3; }
+      40% { height: 100%; opacity: 0.1; }
+      100% { height: 100%; opacity: 0; }
     }
 
     .container {
@@ -192,7 +163,6 @@
       min-height: 100vh;
     }
     
-    /* Enhanced logo glow */
     .logo {
       width: 160px;
       height: 160px;
@@ -200,21 +170,17 @@
       border-radius: 50%;
       border: 4px solid var(--primary);
       padding: 8px;
-      box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
-      animation: logoFloat 6s ease-in-out infinite, logoGlow 3s ease-in-out infinite alternate;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+      animation: logoFloat 6s ease-in-out infinite;
       transition: all 0.3s ease;
       cursor: pointer;
-    }
-
-    @keyframes logoGlow {
-      0% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.6); }
-      100% { box-shadow: 0 0 50px rgba(255, 215, 0, 0.9); }
+      will-change: transform;
     }
 
     .logo:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 60px rgba(255, 215, 0, 0.8);
-      filter: brightness(1.2);
+      box-shadow: 0 0 50px rgba(255, 215, 0, 0.6);
+      filter: brightness(1.1);
     }
 
     @keyframes logoFloat {
@@ -226,36 +192,15 @@
       }
     }
     
-    /* Enhanced CROCKE text with more lighting */
     h1 {
       font-size: 2.5rem;
       font-weight: 700;
       margin: 1rem 0 0.5rem;
       color: var(--primary);
       text-align: center;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.7),
-                   0 0 20px rgba(255, 215, 0, 0.5),
-                   0 0 30px rgba(255, 215, 0, 0.3);
-      animation: neonGlow 1.5s ease-in-out infinite alternate, 
-                 bounceIn 1s ease-out,
-                 textFlicker 5s linear infinite;
-      position: relative;
-    }
-
-    /* Flickering light effect */
-    @keyframes textFlicker {
-      0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
-        opacity: 1;
-        text-shadow: 0 0 10px rgba(255, 215, 0, 0.7),
-                     0 0 20px rgba(255, 215, 0, 0.5),
-                     0 0 30px rgba(255, 215, 0, 0.3);
-      }
-      20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
-        opacity: 0.8;
-        text-shadow: 0 0 5px rgba(255, 215, 0, 0.5),
-                     0 0 10px rgba(255, 215, 0, 0.3),
-                     0 0 15px rgba(255, 215, 0, 0.1);
-      }
+      text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+      animation: neonGlow 2s ease-in-out infinite alternate, bounceIn 1s ease-out;
+      will-change: transform, text-shadow;
     }
 
     @keyframes neonGlow {
@@ -285,7 +230,6 @@
       }
     }
 
-    /* Enhanced COMING SOON badge with more glow */
     .coming-soon-badge {
       background-color: var(--accent);
       color: var(--secondary);
@@ -294,27 +238,19 @@
       font-weight: 700;
       font-size: 1.3rem;
       margin: 1rem 0;
-      animation: pulse 2s infinite, 
-                 floatUp 3s ease-in-out infinite,
-                 badgeGlow 3s ease-in-out infinite alternate;
+      animation: pulse 2s infinite, floatUp 3s ease-in-out infinite;
       border: 2px solid var(--primary);
       display: flex;
       align-items: center;
       gap: 12px;
       text-decoration: none;
       transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    @keyframes badgeGlow {
-      0% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
-      100% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.6); }
+      will-change: transform;
     }
 
     .coming-soon-badge:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
     }
 
     .coming-soon-badge .badge-image {
@@ -322,19 +258,13 @@
       height: 30px;
       object-fit: contain;
       transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.9));
-      animation: badgeImageFloat 4s ease-in-out infinite,
-                 badgeImageGlow 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes badgeImageGlow {
-      0% { filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.7)); }
-      100% { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 1)); }
+      filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7));
+      animation: badgeImageFloat 4s ease-in-out infinite;
     }
 
     .coming-soon-badge:hover .badge-image {
       transform: rotate(15deg) scale(1.2);
-      filter: drop-shadow(0 0 15px var(--primary));
+      filter: drop-shadow(0 0 10px var(--primary));
     }
 
     @keyframes badgeImageFloat {
@@ -353,28 +283,14 @@
       50% { transform: translateY(-10px); }
     }
 
-    /* Enhanced tagline with light effects */
     .tagline {
       font-size: 1.5rem;
       font-weight: 400;
       margin: 1rem 0;
       color: var(--primary);
       text-align: center;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-      animation: slideIn 1s ease-out 0.3s both, 
-                 glow 3s infinite 1s,
-                 textFlicker 6s linear infinite;
-    }
-
-    @keyframes glow {
-      0% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
-      50% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
-      100% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
-    }
-
-    @keyframes slideIn {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+      animation: slideIn 1s ease-out 0.3s both, glow 3s infinite 1s;
     }
 
     .coming-soon-message {
@@ -393,17 +309,16 @@
       width: 100%;
       max-width: 600px;
       border: 1px solid rgba(255, 215, 0, 0.1);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
-                  0 0 20px rgba(255, 215, 0, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       text-align: center;
       animation: slideIn 1s ease-out 0.9s both;
       transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform;
     }
 
     .bio-card:hover {
       transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 15px 45px rgba(255, 215, 0, 0.3),
-                  0 0 30px rgba(255, 215, 0, 0.2);
+      box-shadow: 0 15px 45px rgba(255, 215, 0, 0.3);
     }
 
     .bio-title {
@@ -438,10 +353,10 @@
       align-items: center;
       justify-content: center;
       border: 1px solid rgba(255, 215, 0, 0.05);
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      will-change: transform;
     }
 
     .social-card:nth-child(1) { animation: slideIn 1s ease-out 1.3s both; }
@@ -451,8 +366,7 @@
     
     .social-card:hover {
       transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2),
-                  0 0 20px rgba(255, 215, 0, 0.2);
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2);
       background: rgba(255, 255, 255, 0.07);
     }
 
@@ -476,12 +390,13 @@
       margin-bottom: 1rem;
       color: var(--primary);
       transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+      position: relative;
+      z-index: 2;
     }
 
     .social-card:hover .social-icon {
       transform: scale(1.2) rotate(10deg);
-      filter: drop-shadow(0 0 15px var(--primary));
+      filter: drop-shadow(0 0 8px var(--primary));
     }
     
     .x-logo {
@@ -490,11 +405,13 @@
       margin-bottom: 1rem;
       filter: brightness(0) saturate(100%) invert(85%) sepia(57%) saturate(7498%) hue-rotate(358deg) brightness(105%) contrast(106%);
       transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      position: relative;
+      z-index: 2;
     }
 
     .social-card:hover .x-logo {
       transform: scale(1.2) rotate(10deg);
-      filter: brightness(0) saturate(100%) invert(85%) sepia(57%) saturate(7498%) hue-rotate(358deg) brightness(105%) contrast(106%) drop-shadow(0 0 15px var(--primary));
+      filter: brightness(0) saturate(100%) invert(85%) sepia(57%) saturate(7498%) hue-rotate(358deg) brightness(105%) contrast(106%) drop-shadow(0 0 8px var(--primary));
     }
     
     .social-name {
@@ -502,6 +419,8 @@
       font-weight: 600;
       margin-bottom: 0.5rem;
       transition: color 0.3s ease;
+      position: relative;
+      z-index: 2;
     }
 
     .social-card:hover .social-name {
@@ -513,6 +432,8 @@
       opacity: 0.7;
       font-weight: 300;
       transition: opacity 0.3s ease;
+      position: relative;
+      z-index: 2;
     }
 
     .social-card:hover .social-handle {
@@ -525,7 +446,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 1;
+      z-index: 3;
       text-indent: -9999px;
     }
 
@@ -539,17 +460,16 @@
       width: 100%;
       max-width: 600px;
       border: 1px solid rgba(255, 215, 0, 0.1);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
-                  0 0 20px rgba(255, 215, 0, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       text-align: center;
       animation: slideIn 1s ease-out 1.7s both;
       transition: all 0.3s ease;
+      will-change: transform;
     }
 
     .subscribe-container:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(255, 215, 0, 0.2),
-                  0 0 25px rgba(255, 215, 0, 0.2);
+      box-shadow: 0 12px 40px rgba(255, 215, 0, 0.2);
     }
 
     .subscribe-title {
@@ -557,7 +477,6 @@
       color: var(--primary);
       margin-bottom: 1rem;
       text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-      animation: glow 3s infinite;
     }
 
     .subscribe-form {
@@ -577,11 +496,10 @@
       font-size: 1rem;
       outline: none;
       transition: all 0.3s ease;
-      box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
     }
 
     .email-input:focus {
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
       transform: scale(1.02);
     }
 
@@ -597,12 +515,11 @@
       transition: all 0.3s ease;
       text-transform: uppercase;
       letter-spacing: 1px;
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
     }
 
     .subscribe-btn:hover {
       transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 5px 25px rgba(255, 215, 0, 0.6);
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
     }
 
     .subscribe-btn:active {
@@ -634,6 +551,7 @@
       background: rgba(255, 215, 0, 0.3);
     }
     
+    /* Optimized media queries */
     @media (max-width: 768px) {
       .container {
         padding: 1.5rem;
@@ -674,13 +592,15 @@
       .subscribe-form {
         width: 100%;
       }
+      
+      /* Reduce animations on mobile */
+      .bg-circle {
+        animation-duration: 30s !important;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Light streaks background -->
-  <div class="light-streaks" id="lightStreaks"></div>
-
   <div class="bg-elements">
     <div class="bg-circle circle-1"></div>
     <div class="bg-circle circle-2"></div>
@@ -697,7 +617,6 @@
     
     <h1 class="animate__animated">CROCKE</h1>
     
-    <!-- Updated COMING SOON badge with new image -->
     <a href="https://x.com/crockesol" target="_blank" class="coming-soon-badge animate__animated animate__pulse animate__infinite">
       <img src="https://peach-tricky-puma-362.mypinata.cloud/ipfs/bafkreiayhhl5b7dtzx3qzlxljjeynyhntnougrjjzww2nr4padzddxnhvm" 
            alt="CROCKE Badge" 
@@ -767,52 +686,103 @@
   </div>
 
   <script>
-    // Enhanced particle system with more particles
+    // Optimized particle system with reduced count and better performance
     const particlesContainer = document.getElementById('particles');
-    const particleCount = 150; // Increased number of particles
+    const particleCount = window.innerWidth < 768 ? 30 : 60; // Reduce particles on mobile
     
+    // Create canvas for particles instead of DOM elements
+    const canvas = document.createElement('canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.zIndex = '-1';
+    canvas.style.pointerEvents = 'none';
+    particlesContainer.appendChild(canvas);
+    
+    const ctx = canvas.getContext('2d');
+    const particles = [];
+    
+    // Initialize particles
     for (let i = 0; i < particleCount; i++) {
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
-      
-      const size = Math.random() * 4 + 2; // Larger particles
-      const posX = Math.random() * 100;
-      const delay = Math.random() * 15;
-      const duration = Math.random() * 15 + 10;
-      const opacity = Math.random() * 0.7 + 0.2; // More visible
-      
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-      particle.style.left = `${posX}%`;
-      particle.style.animationDelay = `${delay}s`;
-      particle.style.animationDuration = `${duration}s`;
-      particle.style.opacity = opacity;
-      
-      // Random glow color variation
-      const hue = 50 + Math.random() * 10; // Gold color range
-      particle.style.boxShadow = `0 0 ${Math.random() * 15 + 5}px ${Math.random() * 3 + 1}px hsla(${hue}, 100%, 50%, 0.7)`;
-      
-      particle.style.animation = `falling ${duration}s linear ${delay}s infinite, 
-                                twinkle ${Math.random() * 5 + 3}s ease-in-out infinite`;
-      
-      particlesContainer.appendChild(particle);
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 3 + 1,
+        speed: Math.random() * 2 + 1,
+        opacity: Math.random() * 0.5 + 0.1,
+        angle: Math.random() * Math.PI * 2
+      });
     }
-
-    // Create light streaks
-    const lightStreaks = document.getElementById('lightStreaks');
-    for (let i = 0; i < 8; i++) {
-      const streak = document.createElement('div');
-      streak.classList.add('streak');
-      streak.style.top = `${Math.random() * 100}%`;
-      streak.style.left = `${Math.random() * 100}%`;
-      streak.style.opacity = `${Math.random() * 0.1 + 0.05}`;
-      streak.style.animationDuration = `${Math.random() * 10 + 15}s`;
-      streak.style.animationDelay = `${Math.random() * 5}s`;
-      streak.style.transform = `rotate(${Math.random() * 30 - 15}deg)`;
-      lightStreaks.appendChild(streak);
+    
+    // Animation loop for particles
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      particles.forEach(p => {
+        // Update position
+        p.y += p.speed;
+        p.angle += 0.01;
+        p.x += Math.sin(p.angle) * 0.5;
+        
+        // Reset if out of bounds
+        if (p.y > canvas.height) {
+          p.y = -10;
+          p.x = Math.random() * canvas.width;
+        }
+        
+        // Draw particle
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 215, 0, ${p.opacity})`;
+        ctx.fill();
+      });
+      
+      requestAnimationFrame(animateParticles);
     }
-
-    // Enhanced interactive mouse effects
+    
+    animateParticles();
+    
+    // Lightning effect for social cards
+    const socialCards = document.querySelectorAll('.social-card');
+    
+    socialCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        createSocialLightning(card);
+      });
+    });
+    
+    function createSocialLightning(card) {
+      // Clear any existing lightning
+      const existingLightning = card.querySelectorAll('.social-lightning');
+      existingLightning.forEach(el => el.remove());
+      
+      // Create 1-3 lightning bolts
+      const boltCount = Math.floor(Math.random() * 3) + 1;
+      
+      for (let i = 0; i < boltCount; i++) {
+        const lightning = document.createElement('div');
+        lightning.className = 'social-lightning';
+        
+        // Random position and angle
+        const left = Math.random() * 80 + 10; // 10-90%
+        const angle = Math.random() * 30 - 15; // -15 to 15 degrees
+        
+        lightning.style.left = `${left}%`;
+        lightning.style.transform = `rotate(${angle}deg)`;
+        lightning.style.animation = `socialLightning ${Math.random() * 0.3 + 0.2}s linear`;
+        
+        card.appendChild(lightning);
+        
+        // Remove after animation
+        setTimeout(() => {
+          lightning.remove();
+        }, 300);
+      }
+    }
+    
+    // Interactive mouse effects
     document.addEventListener('mousemove', (e) => {
       const x = e.clientX / window.innerWidth;
       const y = e.clientY / window.innerHeight;
@@ -827,17 +797,6 @@
         const xOffset = (x - 0.5) * 50 * speed;
         const yOffset = (y - 0.5) * 50 * speed;
         circle.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
-      });
-
-      // Light streak follow effect
-      const streaks = document.querySelectorAll('.streak');
-      streaks.forEach(streak => {
-        const streakX = parseFloat(streak.style.left || '50');
-        const streakY = parseFloat(streak.style.top || '50');
-        const dx = (x * 100 - streakX) * 0.0005;
-        const dy = (y * 100 - streakY) * 0.0005;
-        streak.style.left = `${streakX + dx}%`;
-        streak.style.top = `${streakY + dy}%`;
       });
     });
 
@@ -910,8 +869,27 @@
         0% { opacity: 1; }
         100% { opacity: 0; }
       }
+      @keyframes badgeImageGlow {
+        0% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5)); }
+        50% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.9)); }
+        100% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5)); }
+      }
+      @keyframes socialLightning {
+        0% { height: 0; opacity: 0; }
+        10% { height: 50%; opacity: 0.8; }
+        20% { height: 80%; opacity: 0.5; }
+        30% { height: 100%; opacity: 0.3; }
+        40% { height: 100%; opacity: 0.1; }
+        100% { height: 100%; opacity: 0; }
+      }
     `;
     document.head.appendChild(styleTag);
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
   </script>
 </body>
 </html>
