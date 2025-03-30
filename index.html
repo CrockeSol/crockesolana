@@ -7,133 +7,124 @@
   <meta name="keywords" content="CROCKE, cryptocurrency, meme token, crypto community, coming soon" />
   <meta name="author" content="CROCKE Team" />
   <title>CROCKE | Coming Soon</title>
-  
+
   <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     :root {
       --primary: #FFD700;
-      --secondary: #000000;
+      --secondary: #000000; /* Black background, same as the first example */
       --accent: #FFFFFF;
       --telegram: #0088CC;
     }
-    
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    
-    body {
+
+    body, html {
       background-color: var(--secondary);
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Montserrat', sans-serif; /* Keeping CROCKE's font */
       color: var(--accent);
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
+      min-height: 100%;
+      height: 100%; /* Ensure full height for background */
+      overflow: hidden; /* Match the first example's overflow style */
+      position: relative; /* Needed for absolute positioning of children */
     }
 
-    .bg-elements {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-      pointer-events: none;
+    /* --- New Background Styles --- */
+    .animation-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
+        animation: moveBackground 5s ease-in-out infinite;
+        z-index: 0; /* Ensure it's behind the main content */
     }
 
-    .bg-circle {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.15;
-      animation: float 25s infinite linear;
-      will-change: transform;
+    @keyframes moveBackground {
+        0% {
+            background-position: -200% -200%;
+        }
+        50% {
+            background-position: 200% 200%;
+        }
+        100% {
+            background-position: -200% -200%;
+        }
     }
 
-    .circle-1 {
-      width: 300px;
-      height: 300px;
-      background: var(--primary);
-      top: 20%;
-      left: 10%;
-      animation-delay: 0s;
+    .circle {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        animation: floatCircle 6s infinite ease-in-out; /* Renamed to avoid conflict if needed */
+        opacity: 0.5;
+        z-index: 0; /* Ensure it's behind the main content */
     }
 
-    .circle-2 {
-      width: 400px;
-      height: 400px;
-      background: var(--primary);
-      bottom: 15%;
-      right: 10%;
-      animation-delay: 3s;
-      animation-duration: 30s;
+    /* Unique names for children to avoid conflict with any other potential .circle classes */
+    .bg-circle-1 {
+        width: 150px;
+        height: 150px;
+        top: 10%;
+        left: 15%;
+        animation-delay: 0s;
     }
 
-    .circle-3 {
-      width: 200px;
-      height: 200px;
-      background: var(--primary);
-      top: 60%;
-      left: 30%;
-      animation-delay: 5s;
-      animation-duration: 35s;
+    .bg-circle-2 {
+        width: 200px;
+        height: 200px;
+        top: 60%;
+        left: 40%;
+        animation-delay: 2s;
     }
 
-    .circle-4 {
-      width: 250px;
-      height: 250px;
-      background: var(--primary);
-      top: 30%;
-      right: 25%;
-      animation-delay: 7s;
-      animation-duration: 28s;
+    .bg-circle-3 {
+        width: 100px;
+        height: 100px;
+        top: 80%;
+        left: 80%;
+        animation-delay: 4s;
     }
 
-    @keyframes float {
-      0% {
-        transform: translate(0, 0) rotate(0deg);
-      }
-      25% {
-        transform: translate(50px, 50px) rotate(90deg);
-      }
-      50% {
-        transform: translate(100px, 0) rotate(180deg);
-      }
-      75% {
-        transform: translate(50px, -50px) rotate(270deg);
-      }
-      100% {
-        transform: translate(0, 0) rotate(360deg);
-      }
+    @keyframes floatCircle { /* Renamed from float */
+        0% {
+            transform: translate(0, 0);
+            opacity: 0.5;
+        }
+        50% {
+            transform: translate(50px, -50px);
+            opacity: 0.8;
+        }
+        100% {
+            transform: translate(0, 0);
+            opacity: 0.5;
+        }
     }
+    /* --- End New Background Styles --- */
 
-    .particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-      pointer-events: none;
-    }
 
+    /* --- Existing CROCKE Content Styles (Adjusted z-index for container) --- */
     .container {
       max-width: 680px;
       margin: 0 auto;
       padding: 2rem;
-      position: relative;
-      z-index: 1;
+      position: relative; /* Keep relative for positioning within flow */
+      z-index: 1; /* Ensure content is above the new background */
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
+      min-height: 100vh; /* Still ensure container tries to fill height */
+      overflow-y: auto; /* Allow scrolling if content exceeds viewport height */
+      height: 100%; /* Added to allow scrolling within container */
     }
-    
+
     .logo {
       width: 160px;
       height: 160px;
@@ -146,6 +137,7 @@
       transition: all 0.3s ease;
       cursor: pointer;
       will-change: transform;
+      margin-top: 2rem; /* Added some top margin */
     }
 
     .logo:hover {
@@ -162,7 +154,7 @@
         transform: translateY(-15px) rotate(2deg);
       }
     }
-    
+
     h1 {
       font-size: 2.5rem;
       font-weight: 700;
@@ -299,7 +291,7 @@
       max-width: 600px;
       margin: 2rem 0;
     }
-    
+
     .social-card {
       background: rgba(255, 255, 255, 0.03);
       border-radius: 12px;
@@ -320,7 +312,7 @@
     .social-card:nth-child(2) { animation: fadeInUp 1s ease-out 2s forwards; }
     .social-card:nth-child(3) { animation: fadeInUp 1s ease-out 2.2s forwards; }
     .social-card:nth-child(4) { animation: fadeInUp 1s ease-out 2.4s forwards; }
-    
+
     .social-card:hover {
       transform: translateY(-5px) scale(1.03);
       box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2);
@@ -347,10 +339,10 @@
       position: absolute;
       width: 2px;
       height: 0;
-      background: linear-gradient(to bottom, 
-        transparent, 
-        var(--primary), 
-        rgba(255, 215, 0, 0.7), 
+      background: linear-gradient(to bottom,
+        transparent,
+        var(--primary),
+        rgba(255, 215, 0, 0.7),
         transparent);
       opacity: 0;
       transform-origin: top center;
@@ -366,21 +358,21 @@
       80% { height: 100%; opacity: 0.3; }
       100% { height: 100%; opacity: 0; }
     }
-    
+
     .social-icon {
       font-size: 2.2rem;
       margin-bottom: 1rem;
       color: var(--primary);
       transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       position: relative;
-      z-index: 2;
+      z-index: 2; /* Ensure icons are above potential lightning */
     }
 
     .social-card:hover .social-icon {
       transform: scale(1.2) rotate(10deg);
       filter: drop-shadow(0 0 8px var(--primary));
     }
-    
+
     .x-logo {
       width: 36px;
       height: 36px;
@@ -388,47 +380,47 @@
       filter: brightness(0) saturate(100%) invert(85%) sepia(57%) saturate(7498%) hue-rotate(358deg) brightness(105%) contrast(106%);
       transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       position: relative;
-      z-index: 2;
+      z-index: 2; /* Ensure icons are above potential lightning */
     }
 
     .social-card:hover .x-logo {
       transform: scale(1.2) rotate(10deg);
       filter: brightness(0) saturate(100%) invert(85%) sepia(57%) saturate(7498%) hue-rotate(358deg) brightness(105%) contrast(106%) drop-shadow(0 0 8px var(--primary));
     }
-    
+
     .social-name {
       font-size: 1.1rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
       transition: color 0.3s ease;
       position: relative;
-      z-index: 2;
+      z-index: 2; /* Ensure text is above potential lightning */
     }
 
     .social-card:hover .social-name {
       color: var(--primary);
     }
-    
+
     .social-handle {
       font-size: 0.9rem;
       opacity: 0.7;
       font-weight: 300;
       transition: opacity 0.3s ease;
       position: relative;
-      z-index: 2;
+      z-index: 2; /* Ensure text is above potential lightning */
     }
 
     .social-card:hover .social-handle {
       opacity: 1;
     }
-    
+
     .social-link {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 3;
+      z-index: 3; /* Highest z-index within the card */
       text-indent: -9999px;
     }
 
@@ -508,14 +500,16 @@
     .subscribe-btn:active {
       transform: translateY(1px);
     }
-    
+
     footer {
       text-align: center;
       padding: 2rem 0;
       font-size: 0.9rem;
       opacity: 0;
-      margin-top: auto;
+      margin-top: auto; /* Pushes footer down */
       animation: fadeIn 2s ease-out 3s forwards;
+      position: relative; /* Needed for pseudo-element */
+      width: 100%; /* Ensure footer takes width for centering line */
     }
 
     footer::before {
@@ -528,17 +522,17 @@
       height: 1px;
       background: rgba(255, 215, 0, 0.3);
     }
-    
+
     /* Optimized media queries */
     @media (max-width: 768px) {
       .container {
         padding: 1.5rem;
       }
-      
+
       h1 {
         font-size: 2rem;
       }
-      
+
       .tagline {
         font-size: 1.3rem;
       }
@@ -570,46 +564,42 @@
       .subscribe-form {
         width: 100%;
       }
-      
-      /* Reduce animations on mobile */
-      .bg-circle {
-        animation-duration: 40s !important;
-      }
     }
+
   </style>
 </head>
 <body>
-  <div class="bg-elements">
-    <div class="bg-circle circle-1"></div>
-    <div class="bg-circle circle-2"></div>
-    <div class="bg-circle circle-3"></div>
-    <div class="bg-circle circle-4"></div>
-  </div>
+  <!-- New Background Elements -->
+  <div class="animation-container"></div>
+  <div class="circle bg-circle-1"></div>
+  <div class="circle bg-circle-2"></div>
+  <div class="circle bg-circle-3"></div>
 
-  <div class="particles" id="particles"></div>
+  <!-- Removed the old <div class="bg-elements">...</div> -->
+  <!-- Removed the old <div class="particles" id="particles"></div> -->
 
   <div class="container">
-    <img src="https://peach-tricky-puma-362.mypinata.cloud/ipfs/bafkreicxmrteff6dcmeedktfxkqjgekg62mt5e3g4bejvmsqda4smhanga" 
-         alt="CROCKE Logo" 
+    <img src="https://peach-tricky-puma-362.mypinata.cloud/ipfs/bafkreicxmrteff6dcmeedktfxkqjgekg62mt5e3g4bejvmsqda4smhanga"
+         alt="CROCKE Logo"
          class="logo" />
-    
+
     <h1>CROCKE</h1>
-    
+
     <a href="https://x.com/crockesol" target="_blank" class="coming-soon-badge">
-      <img src="https://peach-tricky-puma-362.mypinata.cloud/ipfs/bafkreiayhhl5b7dtzx3qzlxljjeynyhntnougrjjzww2nr4padzddxnhvm" 
-           alt="CROCKE Badge" 
+      <img src="https://peach-tricky-puma-362.mypinata.cloud/ipfs/bafkreiayhhl5b7dtzx3qzlxljjeynyhntnougrjjzww2nr4padzddxnhvm"
+           alt="CROCKE Badge"
            class="badge-image" />
       COMING SOON
     </a>
-    
+
     <p class="tagline">
       The next evolution in meme tokens
     </p>
-    
+
     <div class="coming-soon-message">
       Stay tuned for our exciting launch!
     </div>
-    
+
     <div class="bio-card">
       <div class="bio-title">About CROCKE</div>
       <div class="bio-content">
@@ -626,21 +616,21 @@
         <div class="social-handle">@crockesolana</div>
         <a href="https://www.instagram.com/crockesolana" target="_blank" class="social-link">Instagram</a>
       </div>
-      
+
       <div class="social-card">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/X_logo_2023_%28white%29.png/800px-X_logo_2023_%28white%29.png" alt="X Logo" class="x-logo" />
         <div class="social-name">X</div>
         <div class="social-handle">@crockesol</div>
         <a href="https://x.com/crockesol" target="_blank" class="social-link">X</a>
       </div>
-      
+
       <div class="social-card">
         <i class="fab fa-telegram social-icon"></i>
         <div class="social-name">Telegram</div>
         <div class="social-handle">@crockesolana</div>
         <a href="https://t.me/crockesolana" target="_blank" class="social-link">Telegram</a>
       </div>
-      
+
       <div class="social-card">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/X_logo_2023_%28white%29.png/800px-X_logo_2023_%28white%29.png" alt="X Logo" class="x-logo" />
         <div class="social-name">X Community</div>
@@ -657,145 +647,88 @@
         <button type="submit" class="subscribe-btn">Notify Me</button>
       </form>
     </div>
-    
+
     <footer>
-      &copy; 2025 CROCKE. All rights reserved.
+      © 2025 CROCKE. All rights reserved.
     </footer>
   </div>
 
   <script>
-    // Optimized particle system with reduced count and better performance
-    const particlesContainer = document.getElementById('particles');
-    const particleCount = window.innerWidth < 768 ? 30 : 60;
-    
-    // Create canvas for particles
-    const canvas = document.createElement('canvas');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    canvas.style.position = 'fixed';
-    canvas.style.top = '0';
-    canvas.style.left = '0';
-    canvas.style.zIndex = '-1';
-    canvas.style.pointerEvents = 'none';
-    particlesContainer.appendChild(canvas);
-    
-    const ctx = canvas.getContext('2d');
-    const particles = [];
-    
-    // Initialize particles
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 3 + 1,
-        speed: Math.random() * 1.5 + 0.5, // Reduced speed
-        opacity: Math.random() * 0.5 + 0.1,
-        angle: Math.random() * Math.PI * 2
-      });
-    }
-    
-    // Slower animation loop for particles
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      particles.forEach(p => {
-        // Update position with slower movement
-        p.y += p.speed;
-        p.angle += 0.005; // Slower angle change
-        p.x += Math.sin(p.angle) * 0.3; // Reduced horizontal movement
-        
-        // Reset if out of bounds
-        if (p.y > canvas.height) {
-          p.y = -10;
-          p.x = Math.random() * canvas.width;
-        }
-        
-        // Draw particle
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 215, 0, ${p.opacity})`;
-        ctx.fill();
-      });
-      
-      requestAnimationFrame(animateParticles);
-    }
-    
-    animateParticles();
-    
-    // Lightning effect for social cards
+    // Removed the particle system JavaScript
+
+    // Kept the Lightning effect for social cards
     const socialCards = document.querySelectorAll('.social-card');
-    
+
     socialCards.forEach(card => {
       card.addEventListener('mouseenter', () => {
         createSocialLightning(card);
       });
     });
-    
+
     function createSocialLightning(card) {
-      // Clear any existing lightning
       const existingLightning = card.querySelectorAll('.social-lightning');
       existingLightning.forEach(el => el.remove());
-      
-      // Create 1-2 lightning bolts (reduced count)
+
       const boltCount = Math.floor(Math.random() * 2) + 1;
-      
+
       for (let i = 0; i < boltCount; i++) {
         const lightning = document.createElement('div');
         lightning.className = 'social-lightning';
-        
-        // Random position and angle
+
         const left = Math.random() * 80 + 10;
-        const angle = Math.random() * 20 - 10; // Reduced angle range
-        
+        const angle = Math.random() * 20 - 10;
+
         lightning.style.left = `${left}%`;
         lightning.style.transform = `rotate(${angle}deg)`;
-        // Slower animation (600-900ms)
         lightning.style.animation = `socialLightning ${Math.random() * 300 + 600}ms linear`;
-        
+
         card.appendChild(lightning);
-        
-        // Remove after animation
+
         setTimeout(() => {
           lightning.remove();
         }, 1000);
       }
     }
 
-    // Email form submission
+    // Kept the Email form submission logic
     const emailForm = document.getElementById('emailForm');
     emailForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const emailInput = emailForm.querySelector('.email-input');
       const email = emailInput.value;
-      
-      // Here you would typically send the email to your backend
+
       alert(`Thanks for subscribing! We'll notify you at ${email} when we launch.`);
       emailInput.value = '';
-      
-      // Add celebration effect
+
+      // Optional: Add celebration effect (kept from original)
       const confetti = document.createElement('div');
       confetti.style.position = 'fixed';
       confetti.style.top = '0';
       confetti.style.left = '0';
       confetti.style.width = '100%';
       confetti.style.height = '100%';
-      confetti.style.zIndex = '1000';
+      confetti.style.zIndex = '1000'; // Should be high to appear over content briefly
       confetti.style.pointerEvents = 'none';
       confetti.style.background = 'radial-gradient(circle, transparent 0%, rgba(255,215,0,0.2) 100%)';
-      confetti.style.animation = 'fadeOut 1s ease-out 1s forwards';
-      
+      confetti.style.animation = 'fadeOutConfetti 1s ease-out 1s forwards'; // Renamed animation
+
+       // Add keyframe for confetti fade out
+       const styleSheet = document.styleSheets[0];
+       styleSheet.insertRule(`
+           @keyframes fadeOutConfetti {
+               to { opacity: 0; }
+           }
+       `, styleSheet.cssRules.length);
+
+
       document.body.appendChild(confetti);
-      
+
       setTimeout(() => {
         confetti.remove();
       }, 2000);
     });
 
-    // Handle window resize
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
+    // Removed the window resize listener as it was only for the particle canvas
   </script>
 </body>
 </html>
