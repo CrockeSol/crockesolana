@@ -14,7 +14,7 @@
   <style>
     :root {
       --primary: #FFD700;
-      --secondary: #000000; /* Black background, same as the first example */
+      --secondary: #000000; /* Black background */
       --accent: #FFFFFF;
       --telegram: #0088CC;
     }
@@ -27,85 +27,49 @@
 
     body, html {
       background-color: var(--secondary);
-      font-family: 'Montserrat', sans-serif; /* Keeping CROCKE's font */
+      font-family: 'Montserrat', sans-serif;
       color: var(--accent);
-      min-height: 100%;
-      height: 100%; /* Ensure full height for background */
-      overflow: hidden; /* Match the first example's overflow style */
-      position: relative; /* Needed for absolute positioning of children */
+      min-height: 100vh; /* Use min-height instead of height */
+      /* overflow: hidden; <-- REMOVED this */
+      overflow-x: hidden; /* Prevent horizontal scroll */
+      position: relative;
     }
 
     /* --- New Background Styles --- */
     .animation-container {
-        position: absolute;
+        position: fixed; /* Changed to fixed to stay during scroll */
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         background: linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
         animation: moveBackground 5s ease-in-out infinite;
-        z-index: 0; /* Ensure it's behind the main content */
+        z-index: 0;
     }
 
     @keyframes moveBackground {
-        0% {
-            background-position: -200% -200%;
-        }
-        50% {
-            background-position: 200% 200%;
-        }
-        100% {
-            background-position: -200% -200%;
-        }
+        0% { background-position: -200% -200%; }
+        50% { background-position: 200% 200%; }
+        100% { background-position: -200% -200%; }
     }
 
     .circle {
-        position: absolute;
+        position: fixed; /* Changed to fixed to stay during scroll */
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.1);
-        animation: floatCircle 6s infinite ease-in-out; /* Renamed to avoid conflict if needed */
+        animation: floatCircle 6s infinite ease-in-out;
         opacity: 0.5;
-        z-index: 0; /* Ensure it's behind the main content */
+        z-index: 0;
     }
 
-    /* Unique names for children to avoid conflict with any other potential .circle classes */
-    .bg-circle-1 {
-        width: 150px;
-        height: 150px;
-        top: 10%;
-        left: 15%;
-        animation-delay: 0s;
-    }
+    .bg-circle-1 { width: 150px; height: 150px; top: 10%; left: 15%; animation-delay: 0s; }
+    .bg-circle-2 { width: 200px; height: 200px; top: 60%; left: 40%; animation-delay: 2s; }
+    .bg-circle-3 { width: 100px; height: 100px; top: 80%; left: 80%; animation-delay: 4s; }
 
-    .bg-circle-2 {
-        width: 200px;
-        height: 200px;
-        top: 60%;
-        left: 40%;
-        animation-delay: 2s;
-    }
-
-    .bg-circle-3 {
-        width: 100px;
-        height: 100px;
-        top: 80%;
-        left: 80%;
-        animation-delay: 4s;
-    }
-
-    @keyframes floatCircle { /* Renamed from float */
-        0% {
-            transform: translate(0, 0);
-            opacity: 0.5;
-        }
-        50% {
-            transform: translate(50px, -50px);
-            opacity: 0.8;
-        }
-        100% {
-            transform: translate(0, 0);
-            opacity: 0.5;
-        }
+    @keyframes floatCircle {
+        0% { transform: translate(0, 0); opacity: 0.5; }
+        50% { transform: translate(50px, -50px); opacity: 0.8; }
+        100% { transform: translate(0, 0); opacity: 0.5; }
     }
     /* --- End New Background Styles --- */
 
@@ -115,16 +79,17 @@
       max-width: 680px;
       margin: 0 auto;
       padding: 2rem;
-      position: relative; /* Keep relative for positioning within flow */
-      z-index: 1; /* Ensure content is above the new background */
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh; /* Still ensure container tries to fill height */
-      overflow-y: auto; /* Allow scrolling if content exceeds viewport height */
-      height: 100%; /* Added to allow scrolling within container */
+      min-height: 100vh; /* Keep this to push footer down */
+      /* overflow-y: auto; <-- REMOVED this */
+      /* height: 100%; <-- REMOVED this */
     }
 
+    /* Styles for logo, h1, coming-soon-badge, tagline, etc. remain the same */
     .logo {
       width: 160px;
       height: 160px;
@@ -137,7 +102,7 @@
       transition: all 0.3s ease;
       cursor: pointer;
       will-change: transform;
-      margin-top: 2rem; /* Added some top margin */
+      margin-top: 2rem;
     }
 
     .logo:hover {
@@ -147,12 +112,8 @@
     }
 
     @keyframes logoFloat {
-      0%, 100% {
-        transform: translateY(0) rotate(0deg);
-      }
-      50% {
-        transform: translateY(-15px) rotate(2deg);
-      }
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(2deg); }
     }
 
     h1 {
@@ -334,16 +295,11 @@
       left: 100%;
     }
 
-    /* Lightning effect */
     .social-lightning {
       position: absolute;
       width: 2px;
       height: 0;
-      background: linear-gradient(to bottom,
-        transparent,
-        var(--primary),
-        rgba(255, 215, 0, 0.7),
-        transparent);
+      background: linear-gradient(to bottom, transparent, var(--primary), rgba(255, 215, 0, 0.7), transparent);
       opacity: 0;
       transform-origin: top center;
       z-index: 0;
@@ -365,7 +321,7 @@
       color: var(--primary);
       transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       position: relative;
-      z-index: 2; /* Ensure icons are above potential lightning */
+      z-index: 2;
     }
 
     .social-card:hover .social-icon {
@@ -380,7 +336,7 @@
       filter: brightness(0) saturate(100%) invert(85%) sepia(57%) saturate(7498%) hue-rotate(358deg) brightness(105%) contrast(106%);
       transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       position: relative;
-      z-index: 2; /* Ensure icons are above potential lightning */
+      z-index: 2;
     }
 
     .social-card:hover .x-logo {
@@ -394,7 +350,7 @@
       margin-bottom: 0.5rem;
       transition: color 0.3s ease;
       position: relative;
-      z-index: 2; /* Ensure text is above potential lightning */
+      z-index: 2;
     }
 
     .social-card:hover .social-name {
@@ -407,7 +363,7 @@
       font-weight: 300;
       transition: opacity 0.3s ease;
       position: relative;
-      z-index: 2; /* Ensure text is above potential lightning */
+      z-index: 2;
     }
 
     .social-card:hover .social-handle {
@@ -420,11 +376,10 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 3; /* Highest z-index within the card */
+      z-index: 3;
       text-indent: -9999px;
     }
 
-    /* Email Subscription Section */
     .subscribe-container {
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(12px);
@@ -506,10 +461,10 @@
       padding: 2rem 0;
       font-size: 0.9rem;
       opacity: 0;
-      margin-top: auto; /* Pushes footer down */
+      margin-top: auto;
       animation: fadeIn 2s ease-out 3s forwards;
-      position: relative; /* Needed for pseudo-element */
-      width: 100%; /* Ensure footer takes width for centering line */
+      position: relative;
+      width: 100%;
     }
 
     footer::before {
@@ -523,47 +478,33 @@
       background: rgba(255, 215, 0, 0.3);
     }
 
+    /* --- ADDED: Hide scrollbar on Desktop --- */
+    @media (min-width: 769px) { /* Apply only on screens wider than 768px */
+      body::-webkit-scrollbar {
+        display: none; /* For Chrome, Safari, and Opera */
+      }
+      body {
+        -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+        scrollbar-width: none;  /* For Firefox */
+      }
+    }
+
     /* Optimized media queries */
     @media (max-width: 768px) {
       .container {
         padding: 1.5rem;
       }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      .tagline {
-        font-size: 1.3rem;
-      }
-
-      .social-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .subscribe-container {
-        padding: 1.5rem;
-      }
+      h1 { font-size: 2rem; }
+      .tagline { font-size: 1.3rem; }
+      .social-grid { grid-template-columns: 1fr 1fr; }
+      .subscribe-container { padding: 1.5rem; }
     }
 
     @media (max-width: 480px) {
-      .social-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .coming-soon-badge {
-        padding: 10px 20px;
-        font-size: 1.1rem;
-      }
-
-      .coming-soon-badge .badge-image {
-        width: 24px;
-        height: 24px;
-      }
-
-      .subscribe-form {
-        width: 100%;
-      }
+      .social-grid { grid-template-columns: 1fr; }
+      .coming-soon-badge { padding: 10px 20px; font-size: 1.1rem; }
+      .coming-soon-badge .badge-image { width: 24px; height: 24px; }
+      .subscribe-form { width: 100%; }
     }
 
   </style>
@@ -574,9 +515,6 @@
   <div class="circle bg-circle-1"></div>
   <div class="circle bg-circle-2"></div>
   <div class="circle bg-circle-3"></div>
-
-  <!-- Removed the old <div class="bg-elements">...</div> -->
-  <!-- Removed the old <div class="particles" id="particles"></div> -->
 
   <div class="container">
     <img src="https://peach-tricky-puma-362.mypinata.cloud/ipfs/bafkreicxmrteff6dcmeedktfxkqjgekg62mt5e3g4bejvmsqda4smhanga"
@@ -610,33 +548,37 @@
 
     <!-- Social Media Section -->
     <div class="social-grid">
-      <div class="social-card">
-        <i class="fab fa-instagram social-icon"></i>
-        <div class="social-name">Instagram</div>
-        <div class="social-handle">@crockesolana</div>
-        <a href="https://www.instagram.com/crockesolana" target="_blank" class="social-link">Instagram</a>
-      </div>
+       <!-- Social Card 1: Instagram -->
+       <div class="social-card">
+         <i class="fab fa-instagram social-icon"></i>
+         <div class="social-name">Instagram</div>
+         <div class="social-handle">@crockesolana</div>
+         <a href="https://www.instagram.com/crockesolana" target="_blank" class="social-link">Instagram</a>
+       </div>
 
-      <div class="social-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/X_logo_2023_%28white%29.png/800px-X_logo_2023_%28white%29.png" alt="X Logo" class="x-logo" />
-        <div class="social-name">X</div>
-        <div class="social-handle">@crockesol</div>
-        <a href="https://x.com/crockesol" target="_blank" class="social-link">X</a>
-      </div>
+       <!-- Social Card 2: X (Primary) -->
+       <div class="social-card">
+         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/X_logo_2023_%28white%29.png/800px-X_logo_2023_%28white%29.png" alt="X Logo" class="x-logo" />
+         <div class="social-name">X</div>
+         <div class="social-handle">@crockesol</div>
+         <a href="https://x.com/crockesol" target="_blank" class="social-link">X</a>
+       </div>
 
-      <div class="social-card">
-        <i class="fab fa-telegram social-icon"></i>
-        <div class="social-name">Telegram</div>
-        <div class="social-handle">@crockesolana</div>
-        <a href="https://t.me/crockesolana" target="_blank" class="social-link">Telegram</a>
-      </div>
+       <!-- Social Card 3: Telegram -->
+       <div class="social-card">
+         <i class="fab fa-telegram social-icon"></i>
+         <div class="social-name">Telegram</div>
+         <div class="social-handle">@crockesolana</div>
+         <a href="https://t.me/crockesolana" target="_blank" class="social-link">Telegram</a>
+       </div>
 
-      <div class="social-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/X_logo_2023_%28white%29.png/800px-X_logo_2023_%28white%29.png" alt="X Logo" class="x-logo" />
-        <div class="social-name">X Community</div>
-        <div class="social-handle">@crockecommunity</div>
-        <a href="https://x.com/crockecommunity" target="_blank" class="social-link">X Community</a>
-      </div>
+       <!-- Social Card 4: X (Community) -->
+       <div class="social-card">
+         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/X_logo_2023_%28white%29.png/800px-X_logo_2023_%28white%29.png" alt="X Logo" class="x-logo" />
+         <div class="social-name">X Community</div>
+         <div class="social-handle">@crockecommunity</div>
+         <a href="https://x.com/crockecommunity" target="_blank" class="social-link">X Community</a>
+       </div>
     </div>
 
     <!-- Email Subscription Section -->
@@ -654,9 +596,7 @@
   </div>
 
   <script>
-    // Removed the particle system JavaScript
-
-    // Kept the Lightning effect for social cards
+    // Lightning effect for social cards
     const socialCards = document.querySelectorAll('.social-card');
 
     socialCards.forEach(card => {
@@ -685,12 +625,14 @@
         card.appendChild(lightning);
 
         setTimeout(() => {
-          lightning.remove();
+          if (lightning.parentNode === card) { // Check if it wasn't already removed
+             lightning.remove();
+          }
         }, 1000);
       }
     }
 
-    // Kept the Email form submission logic
+    // Email form submission logic
     const emailForm = document.getElementById('emailForm');
     emailForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -700,35 +642,44 @@
       alert(`Thanks for subscribing! We'll notify you at ${email} when we launch.`);
       emailInput.value = '';
 
-      // Optional: Add celebration effect (kept from original)
+      // Optional: Add celebration effect
       const confetti = document.createElement('div');
-      confetti.style.position = 'fixed';
+      confetti.style.position = 'fixed'; // Use fixed to cover viewport even when scrolled
       confetti.style.top = '0';
       confetti.style.left = '0';
       confetti.style.width = '100%';
       confetti.style.height = '100%';
-      confetti.style.zIndex = '1000'; // Should be high to appear over content briefly
+      confetti.style.zIndex = '1000';
       confetti.style.pointerEvents = 'none';
       confetti.style.background = 'radial-gradient(circle, transparent 0%, rgba(255,215,0,0.2) 100%)';
-      confetti.style.animation = 'fadeOutConfetti 1s ease-out 1s forwards'; // Renamed animation
+      confetti.style.animation = 'fadeOutConfetti 1s ease-out 1s forwards';
 
-       // Add keyframe for confetti fade out
-       const styleSheet = document.styleSheets[0];
-       styleSheet.insertRule(`
-           @keyframes fadeOutConfetti {
-               to { opacity: 0; }
+       // Add keyframe for confetti fade out if not already present
+       let styleSheet = document.styleSheets[0];
+       let ruleExists = false;
+       for(let i = 0; i < styleSheet.cssRules.length; i++) {
+           if (styleSheet.cssRules[i].name === 'fadeOutConfetti') {
+               ruleExists = true;
+               break;
            }
-       `, styleSheet.cssRules.length);
-
+       }
+       if (!ruleExists) {
+           styleSheet.insertRule(`
+               @keyframes fadeOutConfetti {
+                   to { opacity: 0; }
+               }
+           `, styleSheet.cssRules.length);
+       }
 
       document.body.appendChild(confetti);
 
       setTimeout(() => {
-        confetti.remove();
+        if (confetti.parentNode === document.body) { // Check if it wasn't already removed
+            confetti.remove();
+        }
       }, 2000);
     });
 
-    // Removed the window resize listener as it was only for the particle canvas
   </script>
 </body>
 </html>
